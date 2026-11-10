@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portale CV Commercialisti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+:root{
+  --blu:#004EA3;        /* blu istituzionale (barra superiore sito Ordine) */
+  --blu2:#4D71B5;       /* blu barra di navigazione */
+  --blu-chiaro:#E8EEF8;
+  --grigio:#F0F0F0;
+  --testo:#3F4246;
+  --testo2:#6B6F75;
+  --bordo:#D9DDE3;
+  --scuro:#2C2D2B;
+  --bianco:#fff;
+  --ok:#1B7F4B;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Quicksand,system-ui,sans-serif;color:var(--testo);background:var(--grigio);line-height:1.5;font-size:16px}
+a{color:var(--blu)}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+.wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+
+/* ---------- Testata in stile sito Ordine ---------- */
+.topbar{background:var(--blu);color:#fff;font-size:.85rem;font-weight:600}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;height:36px}
+.topbar a{color:#fff;text-decoration:none}
+.brand{background:#fff}
+.brand .wrap{display:flex;align-items:center;gap:14px;height:84px}
+.brand img.logo{height:64px;width:auto;max-width:72vw;object-fit:contain;flex:none}
+.emblema{border-radius:50%;border:3px solid var(--blu);display:grid;place-items:center;color:var(--blu);font-weight:700;font-size:.8rem}
+.wordmark{font-family:Georgia,"Times New Roman",serif;color:#25324a;font-size:.95rem;line-height:1.15}
+.brand .tag{margin-left:auto;font-weight:700;color:var(--blu);font-size:1rem;text-align:right}
+.brand .tag small{display:block;font-weight:500;color:var(--testo2);font-size:.78rem}
+.navbar{background:var(--blu2)}
+.navbar .wrap{display:flex;gap:4px;overflow-x:auto}
+.navbar a{color:#fff;text-decoration:none;padding:12px 14px;font-weight:600;font-size:.92rem;white-space:nowrap;border-bottom:3px solid transparent}
+.navbar a.on,.navbar a:hover{border-bottom-color:#fff;background:rgba(255,255,255,.08)}
+
+/* ---------- Componenti ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--blu);background:var(--blu);color:#fff;padding:10px 18px;border-radius:6px;font-weight:700;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.btn.sec{background:#fff;color:var(--blu)}
+.btn.small{padding:6px 12px;font-size:.88rem}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--blu)}
+.card{background:#fff;border-radius:var(--radius);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.hint{color:var(--testo2);font-size:.92rem;margin:.2rem 0 1rem}
+.badge{display:inline-block;background:var(--blu-chiaro);color:var(--blu);font-weight:700;font-size:.75rem;padding:3px 8px;border-radius:99px;letter-spacing:.03em}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--scuro);color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.on{opacity:1}
+
+/* ---------- Home ---------- */
+.hero{background:linear-gradient(120deg,var(--blu) 0%,var(--blu2) 100%);color:#fff;padding:56px 0}
+.hero .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.hero h1{font-size:2.3rem;line-height:1.15;margin:.4rem 0 1rem}
+.hero p{font-size:1.1rem;opacity:.95;max-width:560px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.hero .btn{background:#fff;color:var(--blu);border-color:#fff}
+.hero .btn.sec{background:transparent;color:#fff}
+.hero-demo{background:#fff;color:var(--testo);border-radius:14px;padding:20px;display:flex;gap:18px;align-items:center;box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.hero-demo .qr{width:130px;flex:none}
+.hero-demo h3{margin:0;color:var(--blu)}
+.sezione{padding:48px 0}
+.sezione h2{color:var(--blu);font-size:1.6rem;margin:0 0 .3rem}
+.passi{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.passi .card{padding:24px}
+.passi .num{width:40px;height:40px;border-radius:50%;background:var(--blu);color:#fff;display:grid;place-items:center;font-weight:700;font-size:1.1rem}
+.passi h3{color:var(--blu);margin:.8rem 0 .3rem}
+.passi p{margin:0;color:var(--testo2)}
+.plus{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px}
+.plus .card{padding:22px;border-top:4px solid var(--blu)}
+.plus h3{margin:0 0 .4rem;font-size:1.05rem;color:var(--scuro)}
+.plus p{margin:0;color:var(--testo2);font-size:.95rem}
+footer{background:var(--scuro);color:#cfd2d6;padding:28px 0;font-size:.88rem;margin-top:24px}
+footer strong{color:#fff}
+
+/* ---------- Editor ---------- */
+.editor{display:grid;grid-template-columns:230px minmax(0,1fr) minmax(0,1fr);gap:20px;padding:24px 16px;max-width:1500px;margin:0 auto}
+.passi-nav{padding:10px;align-self:start;position:sticky;top:12px}
+.passi-nav button{display:flex;gap:10px;align-items:center;width:100%;text-align:left;border:0;background:none;padding:9px 10px;border-radius:6px;color:var(--testo);font-weight:600;font-size:.92rem}
+.passi-nav button .n{width:24px;height:24px;border-radius:50%;background:var(--grigio);display:grid;place-items:center;font-size:.78rem;flex:none}
+.passi-nav button.on{background:var(--blu-chiaro);color:var(--blu)}
+.passi-nav button.on .n{background:var(--blu);color:#fff}
+.passi-nav button.fatto .n{background:var(--ok);color:#fff}
+.passi-nav hr{border:0;border-top:1px solid var(--bordo);margin:8px 0}
+.form-card{padding:24px;align-self:start}
+.form-card h2{margin:0;color:var(--blu);font-size:1.35rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 14px}
+.f{display:flex;flex-direction:column;gap:4px}
+.f.full{grid-column:1/-1}
+.f label{font-size:.82rem;font-weight:700;color:var(--testo)}
+.f input[type=text],.f input[type=email],.f input[type=tel],.f input[type=url],.f select,.f textarea{border:1px solid var(--bordo);border-radius:6px;padding:9px 10px;font:inherit;font-size:.95rem;color:var(--testo);background:#fff;width:100%}
+.f textarea{min-height:90px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--blu2);outline-offset:0;border-color:var(--blu2)}
+.f.check{flex-direction:row;align-items:flex-start;gap:8px}
+.f.check label{font-weight:500}
+.f.check input{margin-top:4px;width:18px;height:18px;accent-color:var(--blu)}
+.foto{display:flex;gap:14px;align-items:center}
+.foto .img{width:84px;height:100px;border-radius:6px;background:var(--grigio) center/cover;border:1px dashed var(--bordo);display:grid;place-items:center;color:var(--testo2);font-size:.75rem;text-align:center}
+.item{border:1px solid var(--bordo);border-radius:8px;padding:14px;margin-bottom:12px;background:#FAFBFC}
+.item-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.item-head strong{color:var(--blu);font-size:.92rem}
+.item-head button{border:1px solid var(--bordo);background:#fff;border-radius:5px;width:30px;height:28px;margin-left:4px;color:var(--testo)}
+.item-head button.del{color:#b3261e}
+.add{border:2px dashed var(--blu2);background:#fff;color:var(--blu);width:100%;padding:12px;border-radius:8px;font-weight:700}
+.form-foot{display:flex;justify-content:space-between;gap:10px;margin-top:22px;padding-top:16px;border-top:1px solid var(--bordo);flex-wrap:wrap}
+.anteprima-live{align-self:start;position:sticky;top:12px;max-height:calc(100vh - 24px);overflow:auto;padding:0}
+.anteprima-live .lbl{position:sticky;top:0;background:#fff;padding:10px 16px;border-bottom:1px solid var(--bordo);font-weight:700;font-size:.85rem;color:var(--testo2);display:flex;justify-content:space-between;z-index:1}
+.anteprima-live .cv{font-size:11px;box-shadow:none;margin:0}
+
+/* ---------- CV formato europeo ---------- */
+.cv{background:#fff;max-width:820px;margin:0 auto;padding:3.2em 3.2em 2.4em;font-size:14px;color:#222;box-shadow:0 2px 10px rgba(0,0,0,.1);font-family:Arial,Helvetica,sans-serif}
+.cv-top{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:.2em solid var(--blu);padding-bottom:.5em;margin-bottom:1.6em}
+.cv-top .t{font-size:1.5em;font-weight:700;color:var(--blu);letter-spacing:.02em}
+.cv-top .s{font-size:.85em;color:#555;text-transform:uppercase;letter-spacing:.12em}
+.cv-head{display:flex;gap:1.6em;align-items:flex-start;margin-bottom:1.6em}
+.cv-head .ph{width:7.5em;height:9em;flex:none;background:#eee center/cover;border-radius:.3em}
+.cv-head h1{margin:0;font-size:2em;color:#111;line-height:1.1}
+.cv-head .tit{color:var(--blu);font-weight:700;margin:.2em 0 .6em;font-size:1.05em}
+.cv-head ul{list-style:none;margin:0;padding:0;font-size:.92em;display:grid;grid-template-columns:auto 1fr;gap:.15em .8em}
+.cv-head ul b{color:#555;font-weight:700}
+.cv-sec{margin-top:1.5em;break-inside:auto}
+.cv-sec>h2{font-size:1em;text-transform:uppercase;letter-spacing:.08em;color:var(--blu);margin:0 0 .7em;display:flex;align-items:center;gap:.7em}
+.cv-sec>h2:after{content:"";flex:1;border-top:1px solid #9fb3d6}
+.cv-row{display:grid;grid-template-columns:28% 1fr;gap:1.2em;margin-bottom:.9em;break-inside:avoid}
+.cv-row .l{color:#555;font-size:.9em;text-align:right;padding-top:.1em}
+.cv{overflow-wrap:anywhere}
+.cv-row .r{min-width:0}
+.cv .tw{overflow-x:auto}
+.qr-page>div,.pubbl{min-width:0}
+.cv-row .r h3{margin:0;font-size:1.05em;color:#111}
+.cv-row .r .org{color:var(--blu);font-weight:700;font-size:.95em}
+.cv-row .r p{margin:.25em 0 0;white-space:pre-line;font-size:.95em}
+.cv table.lang{border-collapse:collapse;width:100%;font-size:.88em;margin-top:.4em}
+.cv table.lang th,.cv table.lang td{border:1px solid #c9d3e3;padding:.35em .5em;text-align:center}
+.cv table.lang th{background:var(--blu-chiaro);color:var(--blu);font-weight:700}
+.cv table.lang td:first-child{text-align:left;font-weight:700}
+.cv .leg{font-size:.78em;color:#666;margin-top:.4em}
+.cv-foot{margin-top:2.2em;padding-top:1em;border-top:1px solid #ccc;display:flex;gap:1.4em;align-items:center;font-size:.78em;color:#555}
+.cv-foot .qr{width:7em;flex:none}
+.cv-foot p{margin:0 0 .4em}
+.cv-vuoto{color:#999;font-style:italic}
+
+/* ---------- Pagina QR ---------- */
+.qr-page{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;padding:24px 16px;max-width:1260px;margin:0 auto}
+.qr-panel{padding:24px;align-self:start;position:sticky;top:12px}
+.qr-panel h2{margin:0 0 .2rem;color:var(--blu);font-size:1.3rem}
+.qr-box{border:1px solid var(--bordo);border-radius:12px;padding:18px;text-align:center;margin:14px 0}
+.qr-box .qr{width:220px;margin:0 auto}
+.qr-box .nome{font-weight:700;color:var(--scuro);margin-top:8px}
+.qr-box .sub{font-size:.8rem;color:var(--testo2)}
+.link{display:flex;gap:6px;margin:10px 0}
+.link input{flex:1;min-width:0;border:1px solid var(--bordo);border-radius:6px;padding:8px;font:inherit;font-size:.8rem;color:var(--testo2)}
+.azioni{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.azioni .btn{justify-content:center}
+.opz{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;font-size:.88rem;font-weight:600}
+.opz label{display:flex;gap:6px;align-items:center}
+.nota{background:#FFF8E5;border:1px solid #F0DCA0;border-radius:8px;padding:10px 12px;font-size:.82rem;color:#6b5200;margin-top:14px}
+.qr svg{display:block;width:100%;height:auto}
+
+/* ---------- Pagina pubblica ---------- */
+.pubbl-bar{background:#fff;border-bottom:1px solid var(--bordo)}
+.pubbl-bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 16px;flex-wrap:wrap}
+.verificato{display:flex;gap:8px;align-items:center;font-size:.85rem;font-weight:600;color:var(--ok)}
+.pubbl{padding:24px 16px}
+.nontrovato{max-width:520px;margin:60px auto;padding:32px;text-align:center}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .editor{grid-template-columns:200px minmax(0,1fr)}
+  .anteprima-live{display:none}
+}
+@media (max-width:860px){
+  .hero .wrap,.passi,.plus{grid-template-columns:1fr}
+  .hero h1{font-size:1.8rem}
+  .editor{grid-template-columns:1fr}
+  .passi-nav{position:static;display:flex;overflow-x:auto;gap:4px}
+  .passi-nav button{width:auto;white-space:nowrap}
+  .passi-nav hr{display:none}
+  .qr-page{grid-template-columns:1fr}
+  .qr-panel{position:static;order:-1}
+  .brand .tag{display:none}
+  .wordmark{font-size:.85rem}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .cv{padding:1.4em;font-size:12.5px}
+  .cv-head{flex-direction:column}
+  .cv-row{grid-template-columns:1fr;gap:.1em}
+  .cv-row .l{text-align:left;font-weight:700;color:var(--blu)}
+  .hero-demo{flex-direction:column;text-align:center}
+}
+
+/* ---------- Stampa / PDF ---------- */
+@media print{
+  @page{size:A4;margin:14mm}
+  body{background:#fff}
+  .no-print,.topbar,.brand,.navbar,footer,.qr-panel,.pubbl-bar,.toast{display:none!important}
+  .qr-page,.pubbl{display:block;padding:0}
+  .cv{box-shadow:none;max-width:none;padding:0;font-size:11.5px}
+  .cv-sec>h2{break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar no-print"><div class="wrap">
+  <span>Portale Curriculum Vitae &middot; Prototipo</span>
+  <a href="#/editor">&#128274; Area personale</a>
+</div></div>
+
+<div class="brand no-print"><div class="wrap">
+  <img class="logo" src="data:image/jpeg;base64,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" alt="Ordine dei Dottori Commercialisti e degli Esperti Contabili di Napoli Nord">
+  <div class="tag">Portale CV<small>Curriculum in formato europeo con QR code</small></div>
+</div></div>
+
+<nav class="navbar no-print"><div class="wrap">
+  <a href="#/" data-nav="home">Home</a>
+  <a href="#/editor" data-nav="editor">Compila il CV</a>
+  <a href="#/qr" data-nav="qr">Il mio QR code</a>
+  <a href="#/come" data-nav="home">Come funziona</a>
+</div></nav>
+
+<main id="app"></main>
+
+<footer class="no-print"><div class="wrap">
+  <strong>Ordine dei Dottori Commercialisti e degli Esperti Contabili di Napoli Nord</strong><br>
+  Portale CV &mdash; prototipo dimostrativo, non ancora un servizio ufficiale. I dati inseriti restano nel browser di chi li compila.
+</div></footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   CONFIGURAZIONE
+   BASE_URL: indirizzo pubblico del portale una volta online.
+   Vuoto = usa l'indirizzo della pagina (funziona quando il file è pubblicato su un server).
+   ========================================================= */
+const BASE_URL = "";
+const URL_ESEMPIO = "https://cv.esempio.it/cv/";
+const STORE_KEY = "portaleCV.v1";
+
+/* ---------------- Definizione delle sezioni ---------------- */
+const LIVELLI = ["", "A1", "A2", "B1", "B2", "C1", "C2"];
+const SEZIONI = [
+  { id:"personali", titolo:"Informazioni personali", hint:"I dati che compaiono in testa al curriculum. Compila solo quelli che vuoi rendere pubblici.",
+    key:"personali", campi:[
+      {k:"foto", t:"foto", label:"Fotografia", w:"full"},
+      {k:"titolo", label:"Titolo", ph:"Dott. / Dott.ssa"},
+      {k:"nome", label:"Nome"},
+      {k:"cognome", label:"Cognome"},
+      {k:"qualifica", label:"Qualifica professionale", ph:"Dottore Commercialista e Revisore Legale"},
+      {k:"dataNascita", label:"Data di nascita", ph:"gg/mm/aaaa"},
+      {k:"nazionalita", label:"Nazionalità", ph:"Italiana"},
+      {k:"indirizzo", label:"Indirizzo dello studio", w:"full"},
+      {k:"telefono", t:"tel", label:"Telefono"},
+      {k:"email", t:"email", label:"Email"},
+      {k:"pec", t:"email", label:"PEC"},
+      {k:"sito", t:"url", label:"Sito web / LinkedIn"},
+      {k:"profilo", t:"textarea", label:"Profilo professionale (breve presentazione)", w:"full"}
+    ]},
+  { id:"albo", titolo:"Iscrizione all'Albo", hint:"Sezione specifica per la professione: Albo, Registro dei Revisori ed elenchi speciali.",
+    key:"albo", campi:[
+      {k:"ordine", label:"Ordine di appartenenza", ph:"Napoli Nord"},
+      {k:"sezione", t:"select", label:"Sezione dell'Albo", opts:["", "A - Dottori Commercialisti", "B - Esperti Contabili", "Elenco Speciale"]},
+      {k:"numero", label:"Numero di iscrizione"},
+      {k:"dataIscrizione", label:"Data di iscrizione", ph:"gg/mm/aaaa"},
+      {k:"revisore", t:"check", label:"Iscritto al Registro dei Revisori Legali", w:"full"},
+      {k:"numRevisore", label:"N. iscrizione Registro Revisori"},
+      {k:"dataRevisore", label:"D.M. / G.U. di iscrizione"},
+      {k:"elenchi", t:"textarea", label:"Altri albi ed elenchi (CTU, delegati alle vendite, gestori della crisi, OCC, mediatori…)", w:"full"}
+    ]},
+  { id:"esperienze", titolo:"Esperienza professionale", hint:"Inserisci le esperienze partendo dalla più recente.",
+    lista:{ key:"esperienze", etichetta:"Esperienza", campi:[
+      {k:"dal", label:"Dal", ph:"mm/aaaa"},
+      {k:"al", label:"Al", ph:"mm/aaaa oppure 'in corso'"},
+      {k:"ruolo", label:"Ruolo / posizione", w:"full"},
+      {k:"datore", label:"Studio / società / ente"},
+      {k:"citta", label:"Città"},
+      {k:"descrizione", t:"textarea", label:"Attività e responsabilità principali", w:"full"}
+    ]}},
+  { id:"istruzione", titolo:"Istruzione e formazione", hint:"Lauree, master, abilitazioni e corsi di specializzazione.",
+    lista:{ key:"istruzione", etichetta:"Titolo", campi:[
+      {k:"dal", label:"Dal", ph:"aaaa"},
+      {k:"al", label:"Al", ph:"aaaa"},
+      {k:"titolo", label:"Titolo conseguito", w:"full"},
+      {k:"ente", label:"Università / ente"},
+      {k:"citta", label:"Città"},
+      {k:"voto", label:"Votazione"},
+      {k:"descrizione", t:"textarea", label:"Note (tesi, materie principali…)", w:"full"}
+    ]}},
+  { id:"lingue", titolo:"Competenze linguistiche", hint:"Livelli secondo il Quadro Comune Europeo di Riferimento (A1-C2).",
+    key:"lingue", campi:[ {k:"madrelingua", label:"Lingua madre", ph:"Italiano", w:"full"} ],
+    lista:{ key:"altreLingue", etichetta:"Lingua", campi:[
+      {k:"lingua", label:"Lingua", w:"full"},
+      {k:"ascolto", t:"select", label:"Ascolto", opts:LIVELLI},
+      {k:"lettura", t:"select", label:"Lettura", opts:LIVELLI},
+      {k:"interazione", t:"select", label:"Interazione orale", opts:LIVELLI},
+      {k:"produzione", t:"select", label:"Produzione orale", opts:LIVELLI},
+      {k:"scrittura", t:"select", label:"Scrittura", opts:LIVELLI},
+      {k:"certificato", label:"Certificazioni"}
+    ]}},
+  { id:"competenze", titolo:"Competenze", hint:"Competenze digitali, organizzative e comunicative.",
+    key:"competenze", campi:[
+      {k:"digitali", t:"textarea", label:"Competenze digitali (gestionali, software fiscali, Office…)", w:"full"},
+      {k:"organizzative", t:"textarea", label:"Competenze organizzative e gestionali", w:"full"},
+      {k:"comunicative", t:"textarea", label:"Competenze comunicative e relazionali", w:"full"},
+      {k:"altre", t:"textarea", label:"Altre competenze", w:"full"},
+      {k:"patente", label:"Patente di guida", ph:"B"}
+    ]},
+  { id:"incarichi", titolo:"Incarichi e commissioni", hint:"Incarichi giudiziari, collegi sindacali, revisioni, commissioni di studio dell'Ordine o del Consiglio Nazionale.",
+    lista:{ key:"incarichi", etichetta:"Incarico", campi:[
+      {k:"periodo", label:"Periodo", ph:"2021 - oggi"},
+      {k:"tipo", t:"select", label:"Tipologia", opts:["", "Incarico giudiziario", "Collegio sindacale", "Revisione legale", "Organismo di vigilanza", "Commissione di studio", "Consiglio / ente", "Altro"]},
+      {k:"descrizione", t:"textarea", label:"Descrizione", w:"full"}
+    ]}},
+  { id:"pubblicazioni", titolo:"Pubblicazioni e convegni", hint:"Pubblicazioni, relazioni a convegni, docenze.",
+    lista:{ key:"pubblicazioni", etichetta:"Voce", campi:[
+      {k:"anno", label:"Anno"},
+      {k:"tipo", t:"select", label:"Tipologia", opts:["", "Pubblicazione", "Relatore a convegno", "Docenza", "Altro"]},
+      {k:"titolo", label:"Titolo", w:"full"},
+      {k:"dettagli", label:"Editore / evento / luogo", w:"full"}
+    ]}},
+  { id:"privacy", titolo:"Privacy e pubblicazione", hint:"Senza consenso il curriculum non viene reso visibile tramite QR code.",
+    key:"privacy", campi:[
+      {k:"luogo", label:"Luogo", ph:"Aversa"},
+      {k:"data", label:"Data", ph:"gg/mm/aaaa"},
+      {k:"autorizzo", t:"check", label:"Autorizzo il trattamento dei dati personali contenuti nel curriculum ai sensi del Regolamento UE 2016/679 (GDPR) e del D.Lgs. 196/2003.", w:"full"},
+      {k:"pubblica", t:"check", label:"Acconsento alla pubblicazione del curriculum, consultabile da chiunque disponga del QR code o del link personale.", w:"full"}
+    ]}
+];
+
+const DICITURA_PRIVACY = "Autorizzo il trattamento dei dati personali contenuti nel mio curriculum vitae in base all'art. 13 del D.Lgs. 196/2003 e all'art. 13 del Regolamento UE 2016/679 relativo alla protezione delle persone fisiche con riguardo al trattamento dei dati personali.";
+
+/* ---------------- Archivio (nel browser) ---------------- */
+function caricaStore(){ try{ return JSON.parse(localStorage.getItem(STORE_KEY)) || {corrente:null, cv:{}}; }catch(e){ return {corrente:null, cv:{}}; } }
+let store = caricaStore();
+function salva(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(store)); }catch(e){ toast("Impossibile salvare nel browser (spazio o permessi)"); } }
+function nuovoId(){
+  const a = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+  const r = new Uint8Array(10); crypto.getRandomValues(r);
+  return [...r].map(x=>a[x % a.length]).join("");
+}
+function cvVuoto(){ return {personali:{}, albo:{ordine:"Napoli Nord"}, esperienze:[], istruzione:[], lingue:{madrelingua:"Italiano"}, altreLingue:[], competenze:{}, incarichi:[], pubblicazioni:[], privacy:{}}; }
+function cvCorrente(){
+  if(!store.corrente || !store.cv[store.corrente]){ const id = nuovoId(); store.cv[id] = cvVuoto(); store.corrente = id; salva(); }
+  return store.cv[store.corrente];
+}
+function linkPubblico(id){
+  if(BASE_URL) return BASE_URL.replace(/\/$/,"") + "/cv/" + id;
+  if(/^https?:$/.test(location.protocol)) return location.origin + location.pathname + "#/cv/" + id;
+  return URL_ESEMPIO + id;
+}
+
+/* ---------------- Utilità ---------------- */
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function get(o, path){ return path.split(".").reduce((a,k)=> a==null ? undefined : a[k], o); }
+function set(o, path, v){ const ks = path.split("."); let a = o; ks.slice(0,-1).forEach((k,i)=>{ if(a[k]==null) a[k] = /^\d+$/.test(ks[i+1]) ? [] : {}; a = a[k]; }); a[ks.at(-1)] = v; }
+let tId; function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("on"); clearTimeout(tId); tId=setTimeout(()=>t.classList.remove("on"),2200); }
+function nomeCompleto(cv){ const p=cv.personali||{}; return [p.titolo,p.nome,p.cognome].filter(Boolean).join(" "); }
+function iniziali(cv){ const p=cv.personali||{}; return ((p.nome||"")[0]||"").toUpperCase() + ((p.cognome||"")[0]||"").toUpperCase(); }
+
+/* ---------------- QR code personalizzato ---------------- */
+function qrSVG(testo, {colore="#004EA3", centro=""}={}){
+  const qr = qrcode(0, "H"); qr.addData(testo); qr.make();
+  const n = qr.getModuleCount(), m = 4, size = n + 2*m;
+  let d = "";
+  for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(qr.isDark(r,c)) d += `M${c+m} ${r+m}h1v1h-1z`;
+  let mid = "";
+  if(centro){
+    const w = Math.round(n*0.22), x = (size - w)/2;
+    mid = `<rect x="${x-0.8}" y="${x-0.8}" width="${w+1.6}" height="${w+1.6}" rx="1.5" fill="#fff"/>
+      <rect x="${x}" y="${x}" width="${w}" height="${w}" rx="1.2" fill="${colore}"/>
+      <text x="${size/2}" y="${size/2}" font-family="Quicksand,Arial,sans-serif" font-weight="700" font-size="${w*0.46}" fill="#fff" text-anchor="middle" dominant-baseline="central">${esc(centro)}</text>`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" role="img" aria-label="QR code del curriculum"><rect width="${size}" height="${size}" fill="#fff"/><path d="${d}" fill="${colore}" shape-rendering="crispEdges"/>${mid}</svg>`;
+}
+
+/* ---------------- Rendering del CV (formato europeo) ---------------- */
+function riga(l, contenuto){ return `<div class="cv-row"><div class="l">${l}</div><div class="r">${contenuto}</div></div>`; }
+function sez(titolo, corpo){ return corpo ? `<section class="cv-sec"><h2>${titolo}</h2>${corpo}</section>` : ""; }
+function periodo(a,b){ return esc([a,b].filter(Boolean).join(" – ")); }
+
+function renderCV(cv, id, conQR=true){
+  const p = cv.personali||{}, al = cv.albo||{}, li = cv.lingue||{}, co = cv.competenze||{}, pr = cv.privacy||{};
+  const contatti = [["Indirizzo",p.indirizzo],["Telefono",p.telefono],["Email",p.email],["PEC",p.pec],["Web",p.sito],["Data di nascita",p.dataNascita],["Nazionalità",p.nazionalita]]
+    .filter(x=>x[1]).map(([k,v])=>`<b>${k}</b><span>${esc(v)}</span>`).join("");
+  const nome = nomeCompleto(cv) || `<span class="cv-vuoto">Nome e cognome</span>`;
+
+  let albo = "";
+  if(al.numero || al.sezione || al.ordine && (al.numero||al.dataIscrizione)){
+    albo += riga(esc(al.dataIscrizione ? "dal " + al.dataIscrizione : ""),
+      `<h3>Iscritto all'Albo dei Dottori Commercialisti e degli Esperti Contabili</h3>
+       <div class="org">Ordine di ${esc(al.ordine||"")}${al.sezione ? " &middot; Sezione " + esc(al.sezione) : ""}${al.numero ? " &middot; n. " + esc(al.numero) : ""}</div>`);
+  }
+  if(al.revisore) albo += riga(esc(al.dataRevisore||""), `<h3>Iscritto al Registro dei Revisori Legali</h3>${al.numRevisore?`<div class="org">n. ${esc(al.numRevisore)}</div>`:""}`);
+  if(al.elenchi) albo += riga("Altri albi ed elenchi", `<p>${esc(al.elenchi)}</p>`);
+
+  const esp = (cv.esperienze||[]).filter(e=>e.ruolo||e.datore).map(e => riga(periodo(e.dal,e.al),
+    `<h3>${esc(e.ruolo)}</h3><div class="org">${esc([e.datore,e.citta].filter(Boolean).join(", "))}</div>${e.descrizione?`<p>${esc(e.descrizione)}</p>`:""}`)).join("");
+  const ist = (cv.istruzione||[]).filter(e=>e.titolo||e.ente).map(e => riga(periodo(e.dal,e.al),
+    `<h3>${esc(e.titolo)}</h3><div class="org">${esc([e.ente,e.citta].filter(Boolean).join(", "))}</div>${e.voto?`<p>Votazione: ${esc(e.voto)}</p>`:""}${e.descrizione?`<p>${esc(e.descrizione)}</p>`:""}`)).join("");
+
+  const altre = (cv.altreLingue||[]).filter(l=>l.lingua);
+  let lingue = li.madrelingua ? riga("Lingua madre", `<h3>${esc(li.madrelingua)}</h3>`) : "";
+  if(altre.length){
+    lingue += riga("Altre lingue", `<div class="tw"><table class="lang"><thead><tr><th rowspan="2"></th><th colspan="2">Comprensione</th><th colspan="2">Parlato</th><th rowspan="2">Scrittura</th></tr>
+      <tr><th>Ascolto</th><th>Lettura</th><th>Interazione</th><th>Produzione</th></tr></thead><tbody>
+      ${altre.map(l=>`<tr><td>${esc(l.lingua)}${l.certificato?`<br><small style="font-weight:400">${esc(l.certificato)}</small>`:""}</td><td>${esc(l.ascolto||"–")}</td><td>${esc(l.lettura||"–")}</td><td>${esc(l.interazione||"–")}</td><td>${esc(l.produzione||"–")}</td><td>${esc(l.scrittura||"–")}</td></tr>`).join("")}
+      </tbody></table></div><div class="leg">Livelli: A1-A2 utente base &middot; B1-B2 utente autonomo &middot; C1-C2 utente avanzato &mdash; Quadro Comune Europeo di Riferimento delle Lingue</div>`);
+  }
+
+  const comp = [["Competenze digitali",co.digitali],["Competenze organizzative",co.organizzative],["Competenze comunicative",co.comunicative],["Altre competenze",co.altre],["Patente di guida",co.patente]]
+    .filter(x=>x[1]).map(([k,v])=>riga(k, `<p style="margin:0">${esc(v)}</p>`)).join("");
+  const inc = (cv.incarichi||[]).filter(e=>e.descrizione).map(e=>riga(esc(e.periodo||""), `${e.tipo?`<div class="org">${esc(e.tipo)}</div>`:""}<p style="margin:0">${esc(e.descrizione)}</p>`)).join("");
+  const pub = (cv.pubblicazioni||[]).filter(e=>e.titolo).map(e=>riga(esc(e.anno||""), `<h3>${esc(e.titolo)}</h3>${e.tipo||e.dettagli?`<div class="org">${esc([e.tipo,e.dettagli].filter(Boolean).join(" · "))}</div>`:""}`)).join("");
+
+  const qr = conQR && id ? `<div class="qr">${qrSVG(linkPubblico(id),{colore:"#004EA3"})}</div>` : "";
+  const foot = `<div class="cv-foot">${qr}<div>
+      ${pr.autorizzo ? `<p>${DICITURA_PRIVACY}</p>` : `<p class="cv-vuoto">Autorizzazione al trattamento dei dati non ancora rilasciata.</p>`}
+      ${pr.luogo||pr.data ? `<p>${esc([pr.luogo,pr.data].filter(Boolean).join(", "))}</p>`:""}
+      ${qr ? `<p>Versione sempre aggiornata: inquadra il QR code o visita ${esc(linkPubblico(id))}</p>`:""}
+    </div></div>`;
+
+  return `<article class="cv">
+    <div class="cv-top"><div class="t">Curriculum Vitae</div><div class="s">Formato europeo</div></div>
+    <div class="cv-head">
+      ${p.foto ? `<div class="ph" style="background-image:url('${p.foto}')"></div>` : ""}
+      <div><h1>${nome}</h1>${p.qualifica?`<div class="tit">${esc(p.qualifica)}</div>`:""}<ul>${contatti}</ul></div>
+    </div>
+    ${p.profilo ? sez("Profilo professionale", `<p style="margin:0;white-space:pre-line">${esc(p.profilo)}</p>`) : ""}
+    ${sez("Iscrizione all'Albo professionale", albo)}
+    ${sez("Esperienza professionale", esp)}
+    ${sez("Istruzione e formazione", ist)}
+    ${sez("Competenze linguistiche", lingue)}
+    ${sez("Competenze personali", comp)}
+    ${sez("Incarichi e commissioni", inc)}
+    ${sez("Pubblicazioni, convegni e docenze", pub)}
+    ${foot}
+  </article>`;
+}
+
+/* ---------------- Form dell'editor ---------------- */
+let passo = 0;
+function campo(path, f, cv){
+  const v = get(cv, path) ?? "";
+  const cls = "f" + (f.w==="full" ? " full" : "") + (f.t==="check" ? " check" : "");
+  const id = "c_" + path.replace(/\./g,"_");
+  if(f.t==="foto") return `<div class="${cls}"><label>${f.label}</label><div class="foto">
+      <div class="img" style="${v?`background-image:url('${v}');border-style:solid`:""}">${v?"":"Nessuna<br>foto"}</div>
+      <div><input type="file" accept="image/*" data-foto="${path}" id="${id}"><br>${v?`<button class="btn ghost small" data-act="nofoto" data-path="${path}">Rimuovi foto</button>`:""}</div></div></div>`;
+  if(f.t==="textarea") return `<div class="${cls}"><label for="${id}">${f.label}</label><textarea id="${id}" data-path="${path}" placeholder="${esc(f.ph||"")}">${esc(v)}</textarea></div>`;
+  if(f.t==="select") return `<div class="${cls}"><label for="${id}">${f.label}</label><select id="${id}" data-path="${path}">${f.opts.map(o=>`<option value="${esc(o)}"${o===v?" selected":""}>${o||"—"}</option>`).join("")}</select></div>`;
+  if(f.t==="check") return `<div class="${cls}"><input type="checkbox" id="${id}" data-path="${path}"${v?" checked":""}><label for="${id}">${f.label}</label></div>`;
+  return `<div class="${cls}"><label for="${id}">${f.label}</label><input type="${f.t||"text"}" id="${id}" data-path="${path}" value="${esc(v)}" placeholder="${esc(f.ph||"")}"></div>`;
+}
+function sezioneCompilata(s, cv){
+  if(s.lista && (get(cv,s.lista.key)||[]).length) return true;
+  if(s.key){ const o = get(cv,s.key)||{}; return s.campi.some(f=>o[f.k] && !(s.id==="albo"&&f.k==="ordine") && !(s.id==="lingue")); }
+  return false;
+}
+function renderEditor(){
+  const cv = cvCorrente(), s = SEZIONI[passo];
+  $("#app").innerHTML = `<div class="editor">
+    <nav class="card passi-nav" aria-label="Sezioni del curriculum">
+      ${SEZIONI.map((x,i)=>`<button data-passo="${i}" class="${i===passo?"on":""} ${sezioneCompilata(x,cv)?"fatto":""}"><span class="n">${i+1}</span>${x.titolo}</button>`).join("")}
+      <hr><button data-act="esempio"><span class="n">&#9733;</span>Carica un esempio</button>
+      <button data-act="svuota"><span class="n">&#10005;</span>Ricomincia da zero</button>
+    </nav>
+    <section class="card form-card" id="form"></section>
+    <aside class="card anteprima-live"><div class="lbl"><span>Anteprima in tempo reale</span><a href="#/qr">Apri a schermo intero</a></div><div id="live"></div></aside>
+  </div>`;
+  renderForm(); renderLive();
+}
+function renderForm(){
+  const cv = cvCorrente(), s = SEZIONI[passo];
+  let h = `<span class="badge">Sezione ${passo+1} di ${SEZIONI.length}</span><h2>${s.titolo}</h2><p class="hint">${s.hint}</p>`;
+  if(s.campi) h += `<div class="grid">${s.campi.map(f=>campo(s.key+"."+f.k, f, cv)).join("")}</div>`;
+  if(s.lista){
+    const arr = get(cv, s.lista.key) || [];
+    if(s.campi) h += `<h3 style="margin:20px 0 10px;font-size:1rem;color:var(--scuro)">Altre lingue</h3>`;
+    arr.forEach((_,i)=>{
+      h += `<div class="item"><div class="item-head"><strong>${s.lista.etichetta} ${i+1}</strong><span>
+        <button data-act="su" data-i="${i}" title="Sposta su" aria-label="Sposta su">&uarr;</button>
+        <button data-act="giu" data-i="${i}" title="Sposta giù" aria-label="Sposta giù">&darr;</button>
+        <button data-act="elimina" data-i="${i}" class="del" title="Elimina" aria-label="Elimina">&#10005;</button></span></div>
+        <div class="grid">${s.lista.campi.map(f=>campo(s.lista.key+"."+i+"."+f.k, f, cv)).join("")}</div></div>`;
+    });
+    h += `<button class="add" data-act="aggiungi">+ Aggiungi ${s.lista.etichetta.toLowerCase()}</button>`;
+  }
+  h += `<div class="form-foot">
+    <button class="btn sec" data-passo="${Math.max(0,passo-1)}" ${passo===0?"disabled style='visibility:hidden'":""}>&larr; Indietro</button>
+    ${passo < SEZIONI.length-1 ? `<button class="btn" data-passo="${passo+1}">Avanti &rarr;</button>` : `<a class="btn" href="#/qr">Genera il QR code &rarr;</a>`}
+  </div>`;
+  $("#form").innerHTML = h;
+}
+let liveT; function renderLive(){ clearTimeout(liveT); liveT = setTimeout(()=>{ const l=$("#live"); if(l) l.innerHTML = renderCV(cvCorrente(), store.corrente); }, 120); }
+function aggiornaNav(){ const cv=cvCorrente(); document.querySelectorAll(".passi-nav [data-passo]").forEach((b,i)=>b.classList.toggle("fatto", sezioneCompilata(SEZIONI[i],cv))); }
+
+document.addEventListener("input", e=>{
+  const el = e.target; if(!el.dataset.path) return;
+  set(cvCorrente(), el.dataset.path, el.type==="checkbox" ? el.checked : el.value);
+  salva(); renderLive(); aggiornaNav();
+});
+document.addEventListener("change", e=>{
+  const el = e.target;
+  if(el.dataset.path && el.type==="checkbox"){ set(cvCorrente(), el.dataset.path, el.checked); salva(); renderLive(); }
+  if(el.dataset.foto && el.files[0]){
+    const fr = new FileReader();
+    fr.onload = () => { const img = new Image(); img.onload = () => {
+      const W = 360, sc = Math.min(1, W/img.width), c = document.createElement("canvas");
+      c.width = img.width*sc; c.height = img.height*sc; c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+      set(cvCorrente(), el.dataset.foto, c.toDataURL("image/jpeg",0.85)); salva(); renderForm(); renderLive();
+    }; img.src = fr.result; };
+    fr.readAsDataURL(el.files[0]);
+  }
+});
+document.addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  if(b.dataset.passo!==undefined){ passo = +b.dataset.passo; renderEditor(); window.scrollTo({top:0,behavior:"smooth"}); return; }
+  const act = b.dataset.act; if(!act) return;
+  const cv = cvCorrente(), s = SEZIONI[passo], lst = s && s.lista && (get(cv, s.lista.key) || (set(cv, s.lista.key, []), get(cv, s.lista.key)));
+  const i = +b.dataset.i;
+  if(act==="aggiungi"){ lst.push({}); }
+  else if(act==="elimina"){ if(!confirm("Eliminare questa voce?")) return; lst.splice(i,1); }
+  else if(act==="su" && i>0){ [lst[i-1],lst[i]] = [lst[i],lst[i-1]]; }
+  else if(act==="giu" && i<lst.length-1){ [lst[i+1],lst[i]] = [lst[i],lst[i+1]]; }
+  else if(act==="nofoto"){ set(cv, b.dataset.path, ""); }
+  else if(act==="esempio"){ if(!confirm("Sostituire i dati attuali con un curriculum di esempio?")) return; store.cv[store.corrente] = esempio(); salva(); renderEditor(); toast("Esempio caricato"); return; }
+  else if(act==="svuota"){ if(!confirm("Cancellare tutti i dati inseriti?")) return; store.cv[store.corrente] = cvVuoto(); salva(); passo=0; renderEditor(); return; }
+  else if(["png","svg","copia","stampa","rigenera"].includes(act)){ azioneQR(act); return; }
+  else return;
+  salva(); renderForm(); renderLive(); aggiornaNav();
+});
+
+/* ---------------- Pagina "Il mio QR code" ---------------- */
+let opzQR = {colore:"#004EA3", centro:true};
+function svgCorrente(){ const cv=cvCorrente(); return qrSVG(linkPubblico(store.corrente), {colore:opzQR.colore, centro: opzQR.centro ? (iniziali(cv)||"CV") : ""}); }
+function renderQR(){
+  const cv = cvCorrente(), id = store.corrente, url = linkPubblico(id), pr = cv.privacy||{};
+  const pronto = pr.autorizzo && pr.pubblica;
+  $("#app").innerHTML = `<div class="qr-page">
+    <div>${renderCV(cv, id)}</div>
+    <aside class="card qr-panel">
+      <h2>Il tuo QR code</h2>
+      <p class="hint" style="margin:0">Legato soltanto a questo curriculum. Se aggiorni il CV, il QR resta lo stesso.</p>
+      <div class="qr-box"><div class="qr" id="qrbox">${svgCorrente()}</div>
+        <div class="nome">${esc(nomeCompleto(cv)||"Il tuo nome")}</div><div class="sub">Curriculum Vitae &middot; formato europeo</div></div>
+      <div class="opz">
+        <label><input type="radio" name="col" value="#004EA3" ${opzQR.colore==="#004EA3"?"checked":""}> Blu</label>
+        <label><input type="radio" name="col" value="#111111" ${opzQR.colore!=="#004EA3"?"checked":""}> Nero</label>
+        <label><input type="checkbox" id="opzc" ${opzQR.centro?"checked":""}> Iniziali al centro</label>
+      </div>
+      <div class="link"><input readonly value="${esc(url)}" aria-label="Link personale"><button class="btn small sec" data-act="copia">Copia</button></div>
+      <div class="azioni">
+        <button class="btn small" data-act="png">Scarica PNG</button>
+        <button class="btn small" data-act="svg">Scarica SVG</button>
+        <button class="btn small sec" data-act="stampa">Stampa / PDF</button>
+        <a class="btn small sec" href="#/cv/${id}">Vista pubblica</a>
+      </div>
+      <button class="btn ghost small" data-act="rigenera" style="margin-top:10px">&#8635; Rigenera codice (disattiva il QR attuale)</button>
+      ${pronto ? "" : `<div class="nota"><b>Attenzione:</b> il curriculum non è ancora pubblicato. Completa la sezione <a href="#/editor" onclick="passo=${SEZIONI.length-1}">Privacy e pubblicazione</a> per renderlo consultabile tramite QR.</div>`}
+      ${/^https?:$/.test(location.protocol)||BASE_URL ? "" : `<div class="nota">Prototipo in locale: il link nel QR usa un indirizzo d'esempio. Quando il portale sarà online, il QR punterà al vostro dominio.</div>`}
+    </aside></div>`;
+  document.querySelectorAll("input[name=col]").forEach(r=>r.onchange=()=>{ opzQR.colore=r.value; $("#qrbox").innerHTML=svgCorrente(); });
+  $("#opzc").onchange = e => { opzQR.centro = e.target.checked; $("#qrbox").innerHTML=svgCorrente(); };
+}
+function scarica(blob, nome){ const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=nome; document.body.appendChild(a); a.click(); setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500); }
+function nomeFile(){ const p=cvCorrente().personali||{}; return ("QR-CV-" + [p.cognome,p.nome].filter(Boolean).join("-")).replace(/[^\w-]+/g,"_") || "QR-CV"; }
+function azioneQR(act){
+  if(act==="svg") scarica(new Blob([svgCorrente()],{type:"image/svg+xml"}), nomeFile()+".svg");
+  if(act==="png"){
+    const img = new Image(), url = URL.createObjectURL(new Blob([svgCorrente()],{type:"image/svg+xml"}));
+    img.onload = () => { const c=document.createElement("canvas"); c.width=c.height=1200; const g=c.getContext("2d"); g.imageSmoothingEnabled=false; g.drawImage(img,0,0,1200,1200); URL.revokeObjectURL(url); c.toBlob(b=>scarica(b, nomeFile()+".png")); };
+    img.src = url;
+  }
+  if(act==="copia"){ const u=linkPubblico(store.corrente); (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(()=>toast("Link copiato"),()=>{ prompt("Copia il link:", u); }); }
+  if(act==="stampa") window.print();
+  if(act==="rigenera"){
+    if(!confirm("Il QR code attuale smetterà di funzionare e ne verrà creato uno nuovo. Continuare?")) return;
+    const vecchio = store.corrente, id = nuovoId(); store.cv[id] = store.cv[vecchio]; delete store.cv[vecchio]; store.corrente = id; salva(); renderQR(); toast("Nuovo QR code generato");
+  }
+}
+
+/* ---------------- Vista pubblica (chi scansiona il QR) ---------------- */
+function renderPubblico(id){
+  const cv = store.cv[id], pr = cv && cv.privacy || {};
+  if(!cv || !(pr.autorizzo && pr.pubblica)){
+    $("#app").innerHTML = `<div class="card nontrovato"><h2 style="color:var(--blu)">Curriculum non disponibile</h2>
+      <p>Il codice potrebbe essere stato disattivato dal titolare oppure il curriculum non è ancora stato pubblicato.</p><a class="btn" href="#/">Vai al portale</a></div>`;
+    return;
+  }
+  $("#app").innerHTML = `<div class="pubbl-bar"><div class="wrap">
+      <span class="verificato">&#10004; Curriculum pubblicato tramite il Portale CV dell'Ordine</span>
+      <button class="btn small" onclick="window.print()">Scarica PDF</button></div></div>
+    <div class="pubbl">${renderCV(cv, id)}</div>`;
+}
+
+/* ---------------- Home ---------------- */
+function renderHome(scroll){
+  const demo = qrSVG(URL_ESEMPIO + "esempio", {colore:"#004EA3", centro:"CV"});
+  $("#app").innerHTML = `
+  <section class="hero"><div class="wrap">
+    <div>
+      <span class="badge" style="background:rgba(255,255,255,.18);color:#fff">Per tutti i commercialisti</span>
+      <h1>Il tuo curriculum in formato europeo, con un QR code personale</h1>
+      <p>Compila il CV seguendo lo standard Europass, con le sezioni pensate per la professione. Ottieni un QR code unico da stampare sul biglietto da visita, nelle slide o nella firma email.</p>
+      <div class="cta"><a class="btn" href="#/editor">Crea il tuo curriculum</a><a class="btn sec" href="#/come">Come funziona</a></div>
+    </div>
+    <div class="hero-demo"><div class="qr">${demo}</div><div><h3>Dott. Mario Rossi</h3><div style="color:var(--testo2);font-size:.9rem">Dottore Commercialista &middot; Revisore Legale</div><p style="font-size:.88rem;margin:.6rem 0 0">Inquadra il codice per leggere il curriculum, sempre nella versione più aggiornata.</p></div></div>
+  </div></section>
+  <section class="sezione" id="come"><div class="wrap">
+    <h2>Come funziona</h2><p class="hint">Tre passaggi, dal computer o dal telefono.</p>
+    <div class="passi">
+      <div class="card"><div class="num">1</div><h3>Compila</h3><p>Una procedura guidata, sezione per sezione, nel formato europeo. Anteprima in tempo reale.</p></div>
+      <div class="card"><div class="num">2</div><h3>Pubblica</h3><p>Rilasci il consenso al trattamento dei dati e scegli di rendere consultabile il tuo curriculum.</p></div>
+      <div class="card"><div class="num">3</div><h3>Condividi il QR</h3><p>Scarica il QR code personale in PNG o SVG. Chi lo inquadra legge il tuo CV e può scaricarlo in PDF.</p></div>
+    </div>
+  </div></section>
+  <section class="sezione" style="background:#fff"><div class="wrap">
+    <h2>Pensato per la professione</h2>
+    <div class="plus">
+      <div class="card"><h3>Sezioni specifiche</h3><p>Iscrizione all'Albo e sezione, Registro dei Revisori Legali, incarichi giudiziari, collegi sindacali, commissioni di studio.</p></div>
+      <div class="card"><h3>QR code sempre valido</h3><p>Il QR contiene solo il link al tuo curriculum: aggiorni i contenuti quando vuoi, senza ristampare nulla.</p></div>
+      <div class="card"><h3>Privacy sotto controllo</h3><p>Pubblichi solo ciò che scegli. Puoi disattivare il QR code e generarne uno nuovo in qualsiasi momento.</p></div>
+    </div>
+  </div></section>`;
+  if(scroll) setTimeout(()=>document.getElementById("come")?.scrollIntoView({behavior:"smooth"}),30);
+}
+
+/* ---------------- Dati di esempio (fittizi) ---------------- */
+function esempio(){
+  return {
+    personali:{titolo:"Dott.", nome:"Mario", cognome:"Rossi", qualifica:"Dottore Commercialista e Revisore Legale", dataNascita:"12/04/1980", nazionalita:"Italiana",
+      indirizzo:"Via Roma 10, 81031 Aversa (CE)", telefono:"+39 081 000 0000", email:"studio@esempio.it", pec:"mario.rossi@pec.esempio.it", sito:"www.esempio.it",
+      profilo:"Dottore Commercialista con oltre quindici anni di esperienza in consulenza fiscale e societaria, revisione legale e procedure concorsuali. Particolare attenzione alla fiscalità d'impresa e alla crisi d'impresa."},
+    albo:{ordine:"Napoli Nord", sezione:"A - Dottori Commercialisti", numero:"1234", dataIscrizione:"15/01/2009", revisore:true, numRevisore:"150000", dataRevisore:"D.M. 10/06/2009 - G.U. n. 50",
+      elenchi:"Albo dei Consulenti Tecnici d'Ufficio del Tribunale di Napoli Nord\nElenco dei professionisti delegati alle vendite\nElenco dei gestori della crisi da sovraindebitamento (OCC)"},
+    esperienze:[
+      {dal:"01/2012", al:"in corso", ruolo:"Titolare di studio professionale", datore:"Studio Rossi", citta:"Aversa (CE)", descrizione:"Consulenza fiscale, contabile e societaria a imprese e professionisti.\nContenzioso tributario dinanzi alle Corti di Giustizia Tributaria."},
+      {dal:"09/2006", al:"12/2011", ruolo:"Collaboratore senior", datore:"Studio associato di consulenza", citta:"Napoli", descrizione:"Bilanci d'esercizio, dichiarazioni fiscali, operazioni straordinarie."}
+    ],
+    istruzione:[
+      {dal:"2008", al:"2008", titolo:"Abilitazione all'esercizio della professione di Dottore Commercialista", ente:"Università degli Studi di Napoli", citta:"Napoli"},
+      {dal:"2001", al:"2006", titolo:"Laurea magistrale in Economia e Commercio", ente:"Università degli Studi di Napoli", citta:"Napoli", voto:"110/110 e lode"}
+    ],
+    lingue:{madrelingua:"Italiano"},
+    altreLingue:[{lingua:"Inglese", ascolto:"B2", lettura:"C1", interazione:"B2", produzione:"B2", scrittura:"B2", certificato:"IELTS 6.5"}],
+    competenze:{digitali:"Pacchetto Office, principali gestionali per studi professionali, software per la redazione di dichiarazioni fiscali, Entratel e cassetto fiscale.",
+      organizzative:"Coordinamento di un team di quattro collaboratori; gestione delle scadenze fiscali dello studio.", comunicative:"Relatore a convegni ed eventi formativi per la professione.", patente:"B"},
+    incarichi:[
+      {periodo:"2019 - oggi", tipo:"Collegio sindacale", descrizione:"Presidente del collegio sindacale di società di capitali del settore manifatturiero."},
+      {periodo:"2017 - oggi", tipo:"Incarico giudiziario", descrizione:"Curatore fallimentare e professionista delegato alle vendite presso il Tribunale di Napoli Nord."}
+    ],
+    pubblicazioni:[{anno:"2025", tipo:"Relatore a convegno", titolo:"La riforma fiscale e il nuovo concordato preventivo biennale", dettagli:"Convegno di formazione professionale continua"}],
+    privacy:{luogo:"Aversa", data:"10/11/2026", autorizzo:true, pubblica:true}
+  };
+}
+
+/* ---------------- Router ---------------- */
+function route(){
+  const h = location.hash.replace(/^#\/?/, "");
+  const [vista, param] = h.split("/");
+  document.querySelectorAll(".navbar a").forEach(a=>a.classList.toggle("on",
+    (a.dataset.nav==="home" && (vista===""||vista==="come") && a.getAttribute("href")===(vista==="come"?"#/come":"#/")) || a.dataset.nav===vista));
+  if(vista==="editor") renderEditor();
+  else if(vista==="qr") renderQR();
+  else if(vista==="cv") renderPubblico(param);
+  else renderHome(vista==="come");
+  if(vista!=="come") window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>
